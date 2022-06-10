@@ -1,0 +1,121 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Prison Destroyer", "Sentinel")
+
+-- main
+local main = Window:NewTab("Main")
+local mainSection = main:NewSection("Main")
+mainSection:NewLabel("Credits To Tyrel Batutuy")
+mainSection:NewLabel("Prison Destroyer!")
+
+-- give
+local GiveItems = Window:NewTab("Give Items")
+local GiveSection = GiveItems:NewSection("Give Items")
+GiveSection:NewButton("Remington 870", "Gives Remington 870", function()
+local A_1 = game:GetService("Workspace")["Prison_ITEMS"].giver["Remington 870"].ITEMPICKUP
+local Event = game:GetService("Workspace").Remote.ItemHandler
+Event:InvokeServer(A_1)
+end)
+
+GiveSection:NewButton("Pistol", "Gives Pistol", function()
+local A_1 = game:GetService("Workspace")["Prison_ITEMS"].giver.M9.ITEMPICKUP
+local Event = game:GetService("Workspace").Remote.ItemHandler
+Event:InvokeServer(A_1)
+end)
+
+GiveSection:NewButton("Ak-47", "Gives Ak-47", function()
+	local A_1 = game:GetService("Workspace")["Prison_ITEMS"].giver["AK-47"].ITEMPICKUP
+	local Event = game:GetService("Workspace").Remote.ItemHandler
+	Event:InvokeServer(A_1)
+	end)
+    
+GiveSection:NewButton("Make Guns Op", "Make Guns Op", function()
+    for i,v in next, getgc(true) do
+        if type(v) == "table" and v.MaxAmmo then
+            v.MaxAmmo = math.huge
+            v.CurrentAmmo = math.huge
+            v.FireRate = 0.01
+            v.AutoFIre = true
+            v.Bullets = 5
+        end
+    end
+    end)
+
+local MeleeSection = GiveItems:NewSection("Melees Section")
+MeleeSection:NewButton("Crude Knife", "Gives Crude Knife", function()
+local A_1 = game:GetService("Workspace")["Prison_ITEMS"].single["Crude Knife"].ITEMPICKUP
+local Event = game:GetService("Workspace").Remote.ItemHandler
+Event:InvokeServer(A_1)
+end)
+
+MeleeSection:NewButton("Hammer", "Gives Hammer", function()
+local A_1 = game:GetService("Workspace")["Prison_ITEMS"].single.Hammer.ITEMPICKUP
+local Event = game:GetService("Workspace").Remote.ItemHandler
+Event:InvokeServer(A_1)
+end)
+
+-- player
+local Player = Window:NewTab("Player")
+local PlayerSection = Player:NewSection("Player")
+PlayerSection:NewSlider("Set Walkspeed", "Set WalkSpeed", 250, 16, function(s)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+PlayerSection:NewSlider("Set Jumppower", "Set Jumppower", 300, 50, function(s)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+
+-- teams
+local Teams = Window:NewTab("Teams")
+local TeamsSection = Teams:NewSection("Change Teams")
+TeamsSection:NewButton("Inmate", "Become Inmate", function()
+    local Remote = game.Workspace.Remote['TeamEvent']
+     
+    local Arguments = {
+            [1] = "Bright orange"
+    }
+     
+    Remote:FireServer(unpack(Arguments))
+end)
+
+TeamsSection:NewButton("Guard", "Become Guard", function()
+local A_1 = "Bright blue"
+local Event = game:GetService("Workspace").Remote.TeamEvent
+Event:FireServer(A_1)
+end)
+
+TeamsSection:NewButton("Criminal", "Become Criminal", function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-920.510803, 92.2271957, 2131.87061, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+end)
+
+-- teleport
+local tp = Window:NewTab("Teleports")
+local tpSection = tp:NewSection("Prison Teleports")
+tpSection:NewButton("Cafeteria", "Teleports To Cafeteria", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(875.049805, 96.9333496, 2324.5498, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+end)
+
+tpSection:NewButton("Cell", "Teleports To Cell", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(922.099487, 97.1302185, 2462.29956, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+end)
+
+tpSection:NewButton("CourtYard", "Teleports To CourtYard", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(798.999756, 95.1383057, 2540.5, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+end)
+
+tpSection:NewButton("Nexus", "Teleports To Nexus", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(895.399658, 97.1383057, 2388.50073, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+end)
+
+tpSection:NewButton("Guards Spawn", "Teleports To Guards Spawn", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(857.08313, 97.1001282, 2322.84131, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+end)
+
+tpSection:NewButton("Criminal Base", "Teleports To Crim Base", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-920.510803, 92.2271957, 2131.87061, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+end)
+
+local Extra = Window:NewTab("Extra")
+local ExSection = Extra:NewSection("Extra")
+ExSection:NewButton("Admin Script", "Executes Admin Script", function()
+    loadstring(game:HttpGet('https://pastebin.com/raw/1RvgFtcx'))()
+end)
